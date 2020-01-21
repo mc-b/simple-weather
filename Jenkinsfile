@@ -21,5 +21,15 @@ pipeline {
                 }
             }
         }
+        stage('Test Analyse') {
+            steps {
+                sh 'mvn cobertura:cobertura'
+            }
+            post {
+                always {
+                  cobertura coberturaReportFile: 'target/site/cobertura/coverage.xml'
+                }
+            }
+        }
     }
 }
